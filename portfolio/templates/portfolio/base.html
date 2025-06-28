@@ -1,0 +1,126 @@
+{% load static %}
+{% load portfolio_tags %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'de' }}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        {% if meta %}
+            {{ meta.title }}
+        {% else %}
+            My Portfolio
+        {% endif %}
+    </title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+</head>
+
+<body>
+
+    <!-- ==================================
+         Header UI Controls (Top Corners)
+         ================================== -->
+
+    <!-- Burger Menu Toggle (Top Right) -->
+    <button id="menuToggle" class="menu-toggle" aria-label="Menü öffnen">
+        <span class="burger">
+            <span></span><span></span><span></span>
+        </span>
+        <span class="close">×</span>
+    </button>
+
+    <!-- Theme Switcher (Top Left) with three inline SVGs -->
+    <button id="themeButton" class="theme-button" aria-label="Theme wechseln">
+        <span id="themeIcon_light" class="theme-icon">{% include "portfolio/icons/light.svg" %}</span>
+        <span id="themeIcon_dark" class="theme-icon">{% include "portfolio/icons/dark.svg" %}</span>
+        <span id="themeIcon_colorful" class="theme-icon">{% include "portfolio/icons/colorful.svg" %}</span>
+    </button>
+
+    <!-- Language Switcher (Bottom Left Corner) -->
+    <form action="{% url 'set_language' %}" method="post" id="languageForm" class="lang-button">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+        <input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'de' %}en{% else %}de{% endif %}" />
+        <button type="submit" aria-label="Sprache wechseln" style="all: unset; cursor: pointer;">
+            {% if LANGUAGE_CODE == 'de' %}DE{% else %}EN{% endif %}
+        </button>
+    </form>
+
+    <!-- Impressum Button (Bottom Right Corner) -->
+    <button id="imprintButton" class="lang-button" style="left: auto; right: 16px;" aria-label="Impressum anzeigen">
+        i
+    </button>
+
+    <!-- ==================================
+         Mobile Menu (Fullscreen Overlay)
+         ================================== -->
+    <div id="mobileMenu" class="mobile-menu">
+        <nav class="mobile-menu-nav">
+            {% for slug in slugs %}
+                {% with section=sections|get_item:slug %}
+                    <a href="#" data-target="{{ slug }}" onclick="handleMenuClick(event, '{{ slug }}')">
+                        {{ section.title }}
+                    </a>
+                {% endwith %}
+            {% endfor %}
+        </nav>
+    </div>
+
+    <!-- ==================================
+         Timeline Navigation Dots (Right Edge)
+         ================================== -->
+    <nav class="timeline-nav">
+        <ul>
+            {% for slug in slugs %}
+                {% with section=sections|get_item:slug %}
+                    <li>
+                        <a href="#" class="dot" data-target="{{ slug }}" aria-label="{{ section.title }}"></a>
+                    </li>
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- ==================================
+         Main Page Content
+         ================================== -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ==================================
+         Footer (Copyright Info)
+         ================================== -->
+    <footer class="footer">
+        &copy;
+        {% if meta %}
+            {{ meta.copyright_year }} {{ meta.copyright_name }}
+        {% else %}
+            2025 Max Mustermann
+        {% endif %}
+    </footer>
+
+    <!-- ==================================
+         Impressum Modal
+         ================================== -->
+    <div id="imprintModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="imprintClose">&times;</span>
+            <h2>{% if LANGUAGE_CODE == 'de' %}Impressum{% else %}Imprint{% endif %}</h2>
+            <div>{{ imprint.content|safe }}</div>
+        </div>
+    </div>
+
+    <!-- ==================================
+         JavaScript Includes
+         ================================== -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+
+</body>
+</html>

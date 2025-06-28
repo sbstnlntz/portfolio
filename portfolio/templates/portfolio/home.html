@@ -1,0 +1,103 @@
+{% extends 'portfolio/base.html' %}
+{% load portfolio_tags %}
+{% load static %}
+
+{% block content %}
+<div class="page-container">
+
+    {# Loop through all defined section slugs from the view context #}
+    {% for slug in slugs %}
+        {% with section=sections|get_item:slug %}
+            {% if section %}
+                <section class="snap-section" id="{{ section.slug }}">
+                    <div class="section-content hidden">
+
+                        {# =========================== INTRO SECTION =========================== #}
+                        {% if section.slug == 'intro' %}
+                            {% if section.image %}
+                                <img src="{{ section.image.url }}" alt="Profile picture" class="intro-image">
+                            {% endif %}
+                            <p>{{ section.content|safe }}</p>
+
+                        {# =========================== SKILLS SECTION =========================== #}
+                        {% elif section.slug == 'skills' %}
+                            <div class="skills-vertical">
+                                <div class="skills-image-wrapper">
+                                    {% for skill in skills %}
+                                        {% with skill.name|lower|slugify as icon %}
+                                            <div class="skills-image{% if forloop.first %} visible{% endif %}">
+                                                {% include "portfolio/icons/skills/"|add:icon|add:".svg" %}
+                                            </div>
+                                        {% endwith %}
+                                    {% endfor %}
+                                </div>
+                                <div class="skills-text">
+                                    <p>{{ section.content|safe }}</p>
+                                </div>
+                            </div>
+
+                        {# =========================== PROJECTS SECTION (Slider) =========================== #}
+                        {% elif section.slug == 'projects' %}
+                            <div class="slider">
+                                <button class="slider-arrow left" onclick="slideProjects(-1)">
+                                    {% include "portfolio/icons/arrow-left.svg" %}
+                                </button>
+
+                                <div class="slider-track-wrapper">
+                                    <div class="slider-track" id="projectTrack">
+                                        {% for project in projects %}
+                                            {% include "portfolio/_project_card.html" %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <button class="slider-arrow right" onclick="slideProjects(1)">
+                                    {% include "portfolio/icons/arrow-right.svg" %}
+                                </button>
+                            </div>
+
+                        {# =========================== CONTACT SECTION (Buttons) =========================== #}
+                        {% elif section.slug == 'contact' and contact %}
+                            <p>{{ section.content|safe }}</p>
+                            <div class="contact-buttons">
+                                {% if contact.email %}
+                                    <a href="mailto:{{ contact.email }}" class="contact-button" title="Email" target="_blank" rel="noopener">
+                                        {% include "portfolio/icons/email.svg" %}
+                                    </a>
+                                {% endif %}
+                                {% if contact.phone %}
+                                    <a href="tel:{{ contact.phone }}" class="contact-button" title="Phone">
+                                        {% include "portfolio/icons/phone.svg" %}
+                                    </a>
+                                {% endif %}
+                                {% if contact.whatsapp %}
+                                    <a href="{{ contact.whatsapp }}" class="contact-button" title="WhatsApp" target="_blank" rel="noopener">
+                                        {% include "portfolio/icons/whatsapp.svg" %}
+                                    </a>
+                                {% endif %}
+                                {% if contact.github %}
+                                    <a href="{{ contact.github }}" class="contact-button" title="GitHub" target="_blank" rel="noopener">
+                                        {% include "portfolio/icons/github.svg" %}
+                                    </a>
+                                {% endif %}
+                                {% if contact.linkedin %}
+                                    <a href="{{ contact.linkedin }}" class="contact-button" title="LinkedIn" target="_blank" rel="noopener">
+                                        {% include "portfolio/icons/linkedin.svg" %}
+                                    </a>
+                                {% endif %}
+                            </div>
+
+                        {# =========================== GENERIC SECTION (Fallback) =========================== #}
+                        {% else %}
+                            <h1>{{ section.title }}</h1>
+                            <p>{{ section.content|linebreaks }}</p>
+                        {% endif %}
+
+                    </div>
+                </section>
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+
+</div>
+{% endblock %}

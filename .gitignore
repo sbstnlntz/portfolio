@@ -1,0 +1,9 @@
+env/
+__pycache__/
+*.pyc
+db.sqlite3
+media/
+script.py
+portfolio/migrations/
+.env
+static/favicon.ico

@@ -1,0 +1,395 @@
+/* =============================
+   INTRO SECTION
+   ============================= */
+.intro-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  margin-bottom: 1rem;
+}
+
+
+/* =============================
+   SKILLS SECTION
+   ============================= */
+.skills-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+.skills-image-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skills-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  pointer-events: none;
+}
+
+.skills-image.visible {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.skills-image svg {
+  width: 120px !important;
+  height: 120px !important;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.skills-text {
+  text-align: center;
+}
+
+/* Layout alternative mit Skill-Kreis */
+.skills-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+  min-height: 400px;
+}
+
+.skills-intro {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.skills-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.skills-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.skills-track {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  width: 100%;
+}
+
+.skills-slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.skill-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.skill-card img {
+  height: 100px;
+  width: 100px;
+}
+
+.skill-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent-color) calc(var(--percent, 0) * 1%), #e0e0e0 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-circle img {
+  width: 20px;
+  height: 20px;
+}
+
+.skill-label {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+
+/* =============================
+   PROJECTS SECTION (SLIDER)
+   ============================= */
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+}
+
+.slider-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  width: auto;
+}
+
+.slide {
+  min-width: 100%;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+
+/* =============================
+   PROJECT CARD
+   ============================= */
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 425px;
+  min-height: 475px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.project-image {
+  width: 62%;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.project-tag {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: transparent;
+  color: var(--accent-color);
+}
+
+.project-button {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.project-button:hover {
+  background-color: #000;
+}
+
+.project-note {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.75;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+
+/* =============================
+   SLIDER ARROWS
+   ============================= */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-arrow img {
+  width: 20px;
+  height: 20px;
+}
+
+.slider-arrow.left  { left: -20px; }
+.slider-arrow.right { right: -20px; }
+
+
+/* =============================
+   CONTACT SECTION
+   ============================= */
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.contact-button svg {
+  width: 48px;
+  height: 48px;
+  color: var(--text-color);
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.contact-button:hover svg {
+  transform: scale(1.1);
+}
+
+
+/* =============================
+   RESPONSIVE (MOBILE)
+   ============================= */
+@media (max-width: 768px) {
+  .skills-layout {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .skills-intro {
+    flex: 1 1 100%;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .skills-slider {
+    flex: 1 1 100%;
+    max-width: 280px;
+  }
+
+  .intro-image {
+    margin-bottom: 0.75rem;
+  }
+
+  .project-tags {
+    gap: 0.25rem;
+  }
+
+  .project-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .project-card {
+    padding: 1.25rem;
+    width: 100%;
+    max-width: 80vw;
+    margin: 0 auto;
+  }
+
+  .slide {
+    width: 100vw;
+    max-width: 100vw;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .slider {
+    max-width: 100%;
+  }
+
+  .slider-arrow {
+    display: none;
+  }
+
+  .project-image {
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+  }
+
+  .contact-buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .contact-button img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .project-note {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+
+  .section-content {
+    width: 95%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}

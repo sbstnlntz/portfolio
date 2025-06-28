@@ -1,0 +1,66 @@
+<div class="slide">
+    <div class="project-card">
+
+        {% comment %} 
+        ===========================
+        Project Title
+        =========================== 
+        {% endcomment %}
+        <h2>{{ project.title }}</h2>
+
+        {% comment %} 
+        ===========================
+        Optional Project Image
+        =========================== 
+        {% endcomment %}
+        {% if project.image %}
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image">
+        {% endif %}
+
+        {% comment %} 
+        {# ===========================
+        Project Description (formatted)
+        =========================== #} 
+        {% endcomment %}
+        <div class="project-description">
+            {{ project.description|safe }}
+        </div>
+
+        {% comment %} 
+        ===========================
+        Project Tags
+        =========================== 
+        {% endcomment %}
+        {% if project.tags.all %}
+            <div class="project-tags">
+                {% for tag in project.tags.all %}
+                    <span class="project-tag">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% comment %} 
+        ===========================
+        Repository Info
+        =========================== 
+        {% endcomment %}
+        {% if project.repo_missing %}
+            <p class="project-note">
+                <em>
+                    {% if LANGUAGE_CODE == "en" %}
+                        No public repository – but I'm happy to tell you more in person.
+                    {% else %}
+                        Kein öffentliches Repository – aber ich erzähle dir gern mehr im Gespräch.
+                    {% endif %}
+                </em>
+            </p>
+        {% elif project.link %}
+            <p>
+                <a href="{{ project.link }}" target="_blank" class="project-button">
+                    Repository
+                </a>
+            </p>
+        {% endif %}
+
+    </div>
+</div>
